@@ -1,0 +1,97 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    display: flex;
+    height: 100vh;
+    background-color: #f0f0f0;
+    overflow: hidden;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar-right {
+    width: 300px;
+    background-color: #001f3f;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .dropdown {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .overview {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .overview-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 220px;
+    height: 150px;
+    text-align: center;
+    margin: 10px; /* Adjust the margin as per your preference */
+  }
+  
+  .chart {
+    background-color: #ffffff;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .weather-info {
+    background-color: #00264d;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    color: white; /* Text color */
+  }
+  
+  .weather-text {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .weather-title {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 40px;
+  }
+  
+  /* Add more styles as per your need */
+  
