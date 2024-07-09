@@ -9,7 +9,7 @@ const Container = styled.div`
   background-color: #f0f0f0;
   overflow: hidden;
   @media (max-width: 768px) {
-    flex-direction: column; /* Switch to column layout on smaller screens */
+    flex-direction: column;
   }
 `;
 
@@ -47,13 +47,6 @@ const Header = styled.div`
   border-bottom: 1px solid #ccc;
 `;
 
-const Search = styled.input`
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-`;
-
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
@@ -68,16 +61,7 @@ const OverviewItem = styled.div`
   width: 220px;
   height: 150px;
   text-align: center;
-  margin: 10px; /* Adjust the margin as per your preference */
-`;
-
-const Chart = styled.div`
-  background-color: #ffffff;
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  margin: 10px;
 `;
 
 const WeatherInfo = styled.div`
@@ -87,7 +71,7 @@ const WeatherInfo = styled.div`
   width: 100%;
   text-align: center;
   margin-top: 20px;
-  color: white; /* Text color */
+  color: white;
 `;
 
 const WeatherText = styled.p`
@@ -97,8 +81,7 @@ const WeatherText = styled.p`
 
 const WeatherTitle = styled.h1`
   font-size: 32px;
-  color: #333; 
-  margin-bottom: 40px;
+  color: #333;
 `;
 
 const Weather = () => {
@@ -132,6 +115,7 @@ const Weather = () => {
           const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${selectedCity}&appid=${API_KEY}&units=metric`);
           setWeather(response.data);
           setError('');
+          console.log(response.data);
         } catch (err) {
           if (err.response && err.response.status === 401) {
             setError('Invalid API key. Please check your API key.');
@@ -151,8 +135,10 @@ const Weather = () => {
   return (
     <Container>
       <MainContent>
-        <Header>
+        <div>
           <WeatherTitle>Weather Wise</WeatherTitle>
+        </div>
+        <Header>
           <Dropdown
             value={selectedCountry}
             onChange={(e) => setSelectedCountry(e.target.value)}
@@ -185,23 +171,21 @@ const Weather = () => {
             {weather && <img src={getWeatherIconUrl(weather.weather[0].icon)} alt="Weather icon" />}
           </OverviewItem>
           <OverviewItem>
-            <h3>Rain Chance</h3>
-            <p>N/A</p>
-          </OverviewItem>
-          <OverviewItem>
-            <h3>Pressure</h3>
-            <p>{weather ? `${weather.main.pressure} hpa` : 'N/A'}</p>
+            <h3>Sky</h3>
+            <p>{weather ? `${weather.weather[0].description}` : 'N/A'}</p>
             {weather && <img src={getWeatherIconUrl(weather.weather[0].icon)} alt="Weather icon" />}
           </OverviewItem>
           <OverviewItem>
-            <h3>UV Index</h3>
-            <p>N/A</p>
+            <h3>Pressure</h3>
+            <p>{weather ? `${weather.main.pressure} hPa` : 'N/A'}</p>
+            {weather && <img src={getWeatherIconUrl(weather.weather[0].icon)} alt="Weather icon" />}
+          </OverviewItem>
+          <OverviewItem>
+            <h3>Feel Like</h3>
+            <p>{weather ? `${weather.main.feels_like} °C` : 'N/A'}</p>
+            {weather && <img src={getWeatherIconUrl(weather.weather[0].icon)} alt="Weather icon" />}
           </OverviewItem>
         </Overview>
-        <Chart>
-          <h3>Average Weekly Temperature</h3>
-          <p>Graph goes here</p>
-        </Chart>
       </MainContent>
       <SidebarRight>
         {weather && (
@@ -209,7 +193,6 @@ const Weather = () => {
             <h2>{weather.name}</h2>
             <p>{weather.main.temp}°C</p>
             <img src={getWeatherIconUrl(weather.weather[0].icon)} alt="Weather icon" />
-            
             <WeatherInfo>
               <p style={{ marginBottom: '10px' }}>Sunrise: {new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}</p>
               <p>Sunset: {new Date(weather.sys.sunset * 1000).toLocaleTimeString()}</p>
