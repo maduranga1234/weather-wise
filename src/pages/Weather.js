@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Country, City } from 'country-state-city';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 const Container = styled.div`
   display: flex;
@@ -194,8 +196,14 @@ const Weather = () => {
             <p>{weather.main.temp}°C</p>
             <img src={getWeatherIconUrl(weather.weather[0].icon)} alt="Weather icon" />
             <WeatherInfo>
-              <p style={{ marginBottom: '10px' }}>Sunrise: {new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}</p>
-              <p>Sunset: {new Date(weather.sys.sunset * 1000).toLocaleTimeString()}</p>
+              <p style={{ marginBottom: '10px' }}>
+                <FontAwesomeIcon icon={faSun} style={{ marginRight: '5px' }} />
+                Sunrise: {new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}
+              </p>
+              <p>
+                <FontAwesomeIcon icon={faMoon} style={{ marginRight: '5px' }} />
+                Sunset: {new Date(weather.sys.sunset * 1000).toLocaleTimeString()}
+              </p>
             </WeatherInfo>
           </>
         )}
